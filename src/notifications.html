@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications | Ice Butcher Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar will be loaded here -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <!-- Header will be loaded here -->
+      <div id="header-container"></div>
+
+      <div class="row my-4">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="mb-4">Notifications</h2>
+              <p class="text-muted mb-4">Push notifications for important reminders & events</p>
+
+              <div class="notification-section">
+                <h5 class="notification-section-title">Notify me when</h5>
+                <div class="row mt-3">
+                  <div class="col-md-4">
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="checkbox" value="" id="dailyUpdateCheck" checked>
+                      <label class="form-check-label" for="dailyUpdateCheck">
+                        Daily Productivity Update
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="checkbox" value="" id="newEventCheck">
+                      <label class="form-check-label" for="newEventCheck">
+                        New Event Created
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="checkbox" value="" id="newTeamCheck">
+                      <label class="form-check-label" for="newTeamCheck">
+                        When Added to New Team
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="notification-section">
+                <div class="d-flex justify-content-between mb-2">
+                  <h5 class="notification-section-title">Reminders and Events</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="remindersSwitch" checked>
+                  </div>
+                </div>
+                <p class="notification-section-description">
+                  Enabled (Push notifications for important reminders & events)
+                </p>
+              </div>
+
+              <div class="notification-section">
+                <div class="d-flex justify-content-between mb-2">
+                  <h5 class="notification-section-title">Promotions and Offers</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="promotionsSwitch">
+                  </div>
+                </div>
+                <p class="notification-section-description">
+                  Enabled (Push notifications for important reminders & events)
+                </p>
+              </div>
+
+              <div class="notification-section">
+                <div class="d-flex justify-content-between mb-2">
+                  <h5 class="notification-section-title">Email Notifications</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="emailSwitch">
+                  </div>
+                </div>
+                <p class="notification-section-description">
+                  Enabled (Push notifications for important reminders & events)
+                </p>
+              </div>
+
+              <div class="notification-section">
+                <div class="d-flex justify-content-between mb-2">
+                  <h5 class="notification-section-title">SMS Notification</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="smsSwitch">
+                  </div>
+                </div>
+                <p class="notification-section-description">
+                  Enabled (Push notifications for important reminders & events)
+                </p>
+              </div>
+
+              <div class="notification-section">
+                <div class="d-flex justify-content-between mb-2">
+                  <h5 class="notification-section-title">Mobile Push Notification</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="mobileSwitch">
+                  </div>
+                </div>
+                <p class="notification-section-description">
+                  Enabled (Push notifications for important reminders & events)
+                </p>
+              </div>
+
+              <div class="notification-section">
+                <div class="d-flex justify-content-between mb-2">
+                  <h5 class="notification-section-title">Desktop Notification</h5>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="desktopSwitch" checked>
+                  </div>
+                </div>
+                <p class="notification-section-description">
+                  Enabled (Push notifications for important reminders & events)
+                </p>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4">
+                <button class="btn btn-secondary">Cancel</button>
+                <button class="btn btn-primary">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Alert container for notifications -->
+  <div class="alert-container position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
+
+  <!-- JavaScript Dependencies -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+
+  <!-- Custom JS -->
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Add specific notification page functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const saveButton = document.querySelector('.btn-primary');
+      if (saveButton) {
+        saveButton.addEventListener('click', function() {
+          // In a real app, this would save the notification settings to a backend
+
+          // Show success message
+          showAlert('Notification settings saved successfully!', 'success');
+        });
+      }
+
+      function showAlert(message, type = 'info') {
+        const alertContainer = document.querySelector('.alert-container');
+        if (!alertContainer) return;
+
+        const alert = document.createElement('div');
+        alert.className = `alert alert-${type} alert-dismissible fade show`;
+        alert.role = 'alert';
+        alert.innerHTML = `
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+
+        alertContainer.appendChild(alert);
+
+        // Auto dismiss after 5 seconds
+        setTimeout(() => {
+          alert.classList.remove('show');
+          setTimeout(() => {
+            alert.remove();
+          }, 150);
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+</html>

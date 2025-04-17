@@ -1,0 +1,827 @@
+/* Main CSS for Ice Butcher Dashboard */
+
+:root {
+  --sidebar-width: 260px;
+  --header-height: 60px;
+  --primary-color: #0f2d50;
+  --secondary-color: #ff7a59;
+  --light-bg: #f5f7fa;
+  --card-bg: #ffffff;
+  --text-color: #333333;
+  --text-muted: #6c757d;
+  --border-color: #e9ecef;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+  --todo-color: #0f2d50;
+  --doing-color: #ff7a59;
+  --done-color: #7eb6dd;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: var(--sidebar-width);
+  background-color: white;
+  border-right: 1px solid var(--border-color);
+  z-index: 100;
+  transition: all 0.3s;
+}
+
+.sidebar-logo {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-logo img {
+  max-width: 120px;
+}
+
+.sidebar-menu {
+  padding: 1rem 0;
+}
+
+.sidebar-menu-item {
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.sidebar-menu-item:hover, .sidebar-menu-item.active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-menu-item i {
+  margin-right: 10px;
+  font-size: 1.25rem;
+}
+
+.sidebar-menu-item .badge {
+  margin-left: auto;
+}
+
+.user-profile {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.user-email {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* Main Content Styles */
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding: 1rem;
+  min-height: 100vh;
+  transition: all 0.3s;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.5rem 1rem 0.5rem 2.5rem;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+  background-color: var(--light-bg);
+}
+
+.search-box i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.card-header {
+  background-color: transparent;
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* Task Card Styles */
+.task-status {
+  display: flex;
+  gap: 1rem;
+}
+
+.task-column {
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.task-number {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.task-column.todo {
+  background-color: rgba(15, 45, 80, 0.1);
+}
+
+.task-column.todo .task-number {
+  color: var(--todo-color);
+}
+
+.task-column.doing {
+  background-color: rgba(255, 122, 89, 0.1);
+}
+
+.task-column.doing .task-number {
+  color: var(--doing-color);
+}
+
+.task-column.done {
+  background-color: rgba(126, 182, 221, 0.1);
+}
+
+.task-column.done .task-number {
+  color: var(--done-color);
+}
+
+/* Charts */
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+
+/* Activity Table */
+.activity-table {
+  width: 100%;
+}
+
+.activity-table th,
+.activity-table td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.activity-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.activity-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.status-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge.online {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+}
+
+.status-badge.offline {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+/* Tab Navigation */
+.nav-tabs {
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  color: var(--text-muted);
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  background-color: transparent;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--primary-color)!important;
+  font-weight: 500;
+  border-bottom: 2px solid var(--primary-color);
+  background-color: transparent!important;
+  border-radius: 0px;
+}
+
+/* Date Selector */
+.date-selector {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+
+/* Calendar */
+.calendar-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.calendar-day {
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.calendar-day.current {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Message List */
+.chat-list {
+  list-style: none;
+  padding: 0;
+}
+
+.chat-item {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.chat-item:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.chat-item.active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.chat-avatar {
+  margin-right: 1rem;
+}
+
+.chat-info {
+  flex: 1;
+}
+
+.chat-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.chat-message {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.chat-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.chat-badge {
+  background-color: var(--danger-color);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+}
+
+/* Chat Section */
+.chat-container {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  height: 74vh;
+}
+
+.chat-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-body, .tab-content{
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.message {
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.message.outgoing {
+  justify-content: flex-end;
+}
+
+.message-content {
+  max-width: 70%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  position: relative;
+}
+
+.message.incoming .message-content {
+  background-color: var(--light-bg);
+}
+
+.message.outgoing .message-content {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.chat-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+
+.chat-input {
+  flex: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+}
+
+/* Switch */
+.form-switch .form-check-input {
+  width: 3em;
+  height: 1.5em;
+}
+
+/* Notification Settings */
+.notification-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.notification-section:last-child {
+  border-bottom: none;
+}
+
+.notification-section-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.notification-section-description {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+/* Settings Forms */
+
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.profile-upload {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.btn-upload {
+  margin-bottom: 2rem;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .main-content.sidebar-open {
+    margin-left: var(--sidebar-width);
+  }
+
+  .toggle-sidebar {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .task-status {
+    flex-direction: column;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
+/* Progress bars */
+.progress {
+  height: 0.5rem;
+  border-radius: 1rem;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Action buttons */
+.action-buttons button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Card view and list view */
+.card-view, .list-view {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.task-card {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.task-card .card-body {
+  padding: 1.5rem;
+}
+
+.task-card .task-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.task-card .task-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.task-card .task-info {
+  margin-bottom: 1rem;
+}
+
+.task-card .task-info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.task-card .task-info-item i {
+  margin-right: 0.5rem;
+  color: var(--text-muted);
+}
+
+/* Priority badges */
+.priority-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.priority-badge.delivery {
+  background-color: rgba(255, 122, 89, 0.1);
+  color: var(--secondary-color);
+}
+
+.priority-badge.pickup {
+  background-color: rgba(23, 162, 184, 0.1);
+  color: var(--info-color);
+}
+
+.priority-badge.urgent {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+}
+
+.priority-badge.low {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: var(--success-color);
+}
+
+.priority-badge.moderate {
+  background-color: rgba(108, 117, 125, 0.1);
+  color: var(--text-muted);
+}
+
+/* File displays */
+.file-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.file-icon {
+  margin-right: 0.75rem;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+.file-info {
+  flex: 1;
+}
+
+.file-name {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.file-size {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.file-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.toggle-sidebar {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .toggle-sidebar {
+    display: block;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+}
+
+    /* Additional styles specific to the calendar page */
+    .calendar-header {
+      display: grid!important;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .calendar-day-header {
+      padding: 0.5rem;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+    }
+
+    .calendar-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .calendar-week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+    }
+
+    .calendar-day {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #fff;
+      border: 1px solid #e9ecef;
+    }
+
+    .calendar-day:hover {
+      background-color: #f8f9fa;
+    }
+
+    .calendar-day.current {
+      background-color: #0f2d50;
+      color: white;
+      font-weight: 600;
+    }
+
+    .calendar-day.selected {
+      background-color: #7eb6dd;
+      color: white;
+    }
+
+    .calendar-day.other-month {
+      color: #adb5bd;
+      background-color: #f8f9fa;
+    }
+
+    .month-name.active {
+      background-color: #0f2d50;
+      color: white;
+      border-color: #0f2d50;
+    }
+
+    /* Timeline styles */
+    .calendar-timeline {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timeline-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      font-weight: 500;
+      color: #6c757d;
+    }
+
+    .timeline-slot {
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    .timeline-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .timeline-task {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-task.delivery {
+      border-top: 4px solid #ff7a59;
+    }
+
+    .timeline-task.pickup {
+      border-top: 4px solid #17a2b8;
+    }
+
+    .task-title {
+      font-size: 0.875rem;
+      color: #6c757d;
+      margin-bottom: 0.25rem;
+    }
+
+    .task-name {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .task-image-container {
+      height: 150px;
+      overflow: hidden;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .task-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }

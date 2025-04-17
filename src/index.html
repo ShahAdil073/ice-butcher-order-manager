@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Ice Butcher Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar will be loaded here -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <!-- Header will be loaded here -->
+      <div id="header-container"></div>
+
+      <!-- Tab Navigation -->
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Overview</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Board</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="calendar.html">Calender</a>
+        </li>
+      </ul>
+
+      <!-- Content Row 1: Tasks and Work Time -->
+      <div class="row mt-4">
+        <!-- Task Status Card -->
+        <div class="col-lg-7 mb-4">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">Total Task</h5>
+              <div class="date-selector">
+                28
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="task-status">
+                <div class="task-column todo">
+                  <div class="task-number">6</div>
+                  <div class="task-label">To do</div>
+                </div>
+                <div class="task-column doing">
+                  <div class="task-number">3</div>
+                  <div class="task-label">Doing</div>
+                </div>
+                <div class="task-column done">
+                  <div class="task-number">20</div>
+                  <div class="task-label">Done</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Work Time Chart -->
+        <div class="col-lg-5 mb-4">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">Work Time</h5>
+              <div class="date-selector">
+                June, Week 1
+              </div>
+            </div>
+            <div class="card-body">
+              <canvas id="workTimeChart" height="250"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Row 2: Activity -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">Activity</h5>
+              <div class="btn btn-sm btn-outline-primary rounded-pill">
+                Today
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="activity-table table">
+                  <thead>
+                    <tr>
+                      <th width="50">•</th>
+                      <th>Name</th>
+                      <th>Activity</th>
+                      <th>Time</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img src="assets/images/avatar1.png" alt="User Avatar" class="user-avatar">
+                      </td>
+                      <td>Deano Amor</td>
+                      <td>Delivery to Anytown, NY 12345</td>
+                      <td>16:00 PM</td>
+                      <td><span class="status-badge online">Online</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img src="assets/images/avatar2.png" alt="User Avatar" class="user-avatar">
+                      </td>
+                      <td>Jack Husein</td>
+                      <td>Pickup at Anytown, NY 12345</td>
+                      <td>19:00 PM</td>
+                      <td><span class="status-badge offline">Offline</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img src="assets/images/avatar3.png" alt="User Avatar" class="user-avatar">
+                      </td>
+                      <td>Marie Siray</td>
+                      <td>Delivery to Anytown, NY 12345</td>
+                      <td>16:00 PM</td>
+                      <td><span class="status-badge online">Online</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img src="assets/images/avatar4.png" alt="User Avatar" class="user-avatar">
+                      </td>
+                      <td>Jaka Laguna</td>
+                      <td>Pickup at Anytown, NY 12345</td>
+                      <td>19:00 PM</td>
+                      <td><span class="status-badge offline">Offline</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img src="assets/images/avatar5.png" alt="User Avatar" class="user-avatar">
+                      </td>
+                      <td>Erfisien Nota</td>
+                      <td>Delivery to Anytown, NY 12345</td>
+                      <td>16:00 PM</td>
+                      <td><span class="status-badge online">Online</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Alert container for notifications -->
+  <div class="alert-container position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
+
+  <!-- JavaScript Dependencies -->
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../node_modules/chart.js/dist/chart.umd.js"></script>
+
+  <!-- Custom JS -->
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar | Ice Butcher Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar will be loaded here -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <!-- Header will be loaded here -->
+      <div id="header-container"></div>
+
+      <!-- Tab Navigation -->
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Overview</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="board.html">Board</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="calendar.html">Calender</a>
+        </li>
+      </ul>
+
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="calendar-navigation">
+              <button class="btn btn-outline-secondary prev-month me-2">
+                <i class="bi bi-chevron-left"></i>
+              </button>
+              <span class="h5 mb-0 year-display">2025</span>
+              <button class="btn btn-outline-secondary next-month ms-2">
+                <i class="bi bi-chevron-right"></i>
+              </button>
+            </div>
+
+            <div class="month-switcher">
+              <div class="btn-group">
+                <button class="btn btn-outline-secondary month-name">Jan</button>
+                <button class="btn btn-outline-secondary month-name">Feb</button>
+                <button class="btn btn-outline-secondary month-name active">Mar</button>
+                <button class="btn btn-outline-secondary month-name">Apr</button>
+                <button class="btn btn-outline-secondary month-name">May</button>
+                <button class="btn btn-outline-secondary month-name">Jun</button>
+                <button class="btn btn-outline-secondary month-name">Jul</button>
+                <button class="btn btn-outline-secondary month-name">Aug</button>
+                <button class="btn btn-outline-secondary month-name">Sep</button>
+                <button class="btn btn-outline-secondary month-name">Oct</button>
+                <button class="btn btn-outline-secondary month-name">Nov</button>
+                <button class="btn btn-outline-secondary month-name">Dec</button>
+              </div>
+            </div>
+
+            <div class="view-switcher">
+              <div class="btn-group">
+                <button class="btn btn-primary view-button" data-view="card">
+                  <i class="bi bi-grid"></i> Card View
+                </button>
+                <button class="btn btn-outline-primary view-button" data-view="list">
+                  <i class="bi bi-list"></i> List View
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="calendar-header d-flex mb-2">
+                <div class="calendar-day-header">Sun</div>
+                <div class="calendar-day-header">Mon</div>
+                <div class="calendar-day-header">Tue</div>
+                <div class="calendar-day-header">Wed</div>
+                <div class="calendar-day-header">Thu</div>
+                <div class="calendar-day-header">Fri</div>
+                <div class="calendar-day-header">Sat</div>
+              </div>
+
+              <div class="calendar-grid">
+                <div class="calendar-week">
+                  <div class="calendar-day other-month">26</div>
+                  <div class="calendar-day other-month">27</div>
+                  <div class="calendar-day other-month">28</div>
+                  <div class="calendar-day">1</div>
+                  <div class="calendar-day">2</div>
+                  <div class="calendar-day">3</div>
+                  <div class="calendar-day">4</div>
+                </div>
+                <div class="calendar-week">
+                  <div class="calendar-day">5</div>
+                  <div class="calendar-day">6</div>
+                  <div class="calendar-day">7</div>
+                  <div class="calendar-day">8</div>
+                  <div class="calendar-day">9</div>
+                  <div class="calendar-day">10</div>
+                  <div class="calendar-day">11</div>
+                </div>
+                <div class="calendar-week">
+                  <div class="calendar-day">12</div>
+                  <div class="calendar-day">13</div>
+                  <div class="calendar-day">14</div>
+                  <div class="calendar-day">15</div>
+                  <div class="calendar-day">16</div>
+                  <div class="calendar-day">17</div>
+                  <div class="calendar-day current">18</div>
+                </div>
+                <div class="calendar-week">
+                  <div class="calendar-day">19</div>
+                  <div class="calendar-day">20</div>
+                  <div class="calendar-day">21</div>
+                  <div class="calendar-day">22</div>
+                  <div class="calendar-day">23</div>
+                  <div class="calendar-day">24</div>
+                  <div class="calendar-day">25</div>
+                </div>
+                <div class="calendar-week">
+                  <div class="calendar-day">26</div>
+                  <div class="calendar-day">27</div>
+                  <div class="calendar-day">28</div>
+                  <div class="calendar-day">29</div>
+                  <div class="calendar-day">30</div>
+                  <div class="calendar-day other-month">1</div>
+                  <div class="calendar-day other-month">2</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Thursday, 18th March 2025 | 16:00 PM</h4>
+                <div class="btn-group">
+                  <button class="btn btn-primary">Today</button>
+                </div>
+              </div>
+
+              <div class="calendar-timeline card-view">
+                <div class="timeline-header">
+                  <div class="timeline-slot">16:00</div>
+                  <div class="timeline-slot">19:00</div>
+                  <div class="timeline-slot">20:00</div>
+                </div>
+                <div class="timeline-content">
+                  <div class="timeline-task delivery">
+                    <div class="task-meta">
+                      <span class="badge bg-warning text-dark">Delivery</span>
+                    </div>
+                    <h5 class="task-title">Task Id: #12637462</h5>
+                    <h4 class="task-name">Face Art</h4>
+                    <div class="task-image-container">
+                      <img src="assets/images/sculpt3.jpg" alt="Face Art" class="task-image img-fluid rounded">
+                    </div>
+                    <div class="task-file mt-2 d-flex align-items-center">
+                      <i class="bi bi-file-earmark-text me-2"></i>
+                      <div>
+                        <div class="file-name">Minimalist_Face_Art.cnc</div>
+                        <div class="file-size">45.6mb</div>
+                      </div>
+                      <div class="file-actions ms-auto">
+                        <button class="btn btn-sm btn-outline-secondary">
+                          <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="task-progress mt-2">
+                      <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span>Progress</span>
+                        <span>Ongoing</span>
+                      </div>
+                      <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    <div class="task-deadline mt-2">
+                      <div class="d-flex align-items-center">
+                        <i class="bi bi-calendar me-2"></i>
+                        <span>18 March • 16:00</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="timeline-task pickup">
+                    <div class="task-meta">
+                      <span class="badge bg-info text-white">Pickup</span>
+                    </div>
+                    <h5 class="task-title">Task Id: #12637462</h5>
+                    <h4 class="task-name">Geometric Metal</h4>
+                    <div class="task-image-container">
+                      <img src="assets/images/sculpt2.jpg" alt="Geometric Metal" class="task-image img-fluid rounded">
+                    </div>
+                    <div class="task-file mt-2 d-flex align-items-center">
+                      <i class="bi bi-file-earmark-text me-2"></i>
+                      <div>
+                        <div class="file-name">Geometric Twist Metal.cnc</div>
+                        <div class="file-size">45.6mb</div>
+                      </div>
+                      <div class="file-actions ms-auto">
+                        <button class="btn btn-sm btn-outline-secondary">
+                          <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="task-progress mt-2">
+                      <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span>Progress</span>
+                        <span>To Be Started</span>
+                      </div>
+                      <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    <div class="task-deadline mt-2">
+                      <div class="d-flex align-items-center">
+                        <i class="bi bi-calendar me-2"></i>
+                        <span>18 March • 16:00</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="timeline-task delivery">
+                    <div class="task-meta">
+                      <span class="badge bg-warning text-dark">Delivery</span>
+                    </div>
+                    <h5 class="task-title">Task Id: #12637462</h5>
+                    <h4 class="task-name">Human Bust Stone</h4>
+                    <div class="task-image-container">
+                      <img src="assets/images/sculpt1.jpg" alt="Human Bust Stone" class="task-image img-fluid rounded">
+                    </div>
+                    <div class="task-file mt-2 d-flex align-items-center">
+                      <i class="bi bi-file-earmark-text me-2"></i>
+                      <div>
+                        <div class="file-name">Human_Bust_Stone.cnc</div>
+                        <div class="file-size">45.6mb</div>
+                      </div>
+                      <div class="file-actions ms-auto">
+                        <button class="btn btn-sm btn-outline-secondary">
+                          <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="task-progress mt-2">
+                      <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span>Progress</span>
+                        <span>To Be Started</span>
+                      </div>
+                      <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                    <div class="task-deadline mt-2">
+                      <div class="d-flex align-items-center">
+                        <i class="bi bi-calendar me-2"></i>
+                        <span>18 March • 16:00</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Content Row 2: Activity -->
+              <div class="row list-view d-none">
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="card-title mb-0">Activity</h5>
+                      <div class="btn btn-sm btn-outline-primary rounded-pill">
+                        Today
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="activity-table table">
+                          <thead>
+                            <tr>
+                              <th width="50">•</th>
+                              <th>Name</th>
+                              <th>Activity</th>
+                              <th>Time</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <img src="assets/images/avatar1.png" alt="User Avatar" class="user-avatar">
+                              </td>
+                              <td>Deano Amor</td>
+                              <td>Delivery to Anytown, NY 12345</td>
+                              <td>16:00 PM</td>
+                              <td><span class="status-badge online">Online</span></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <img src="assets/images/avatar2.png" alt="User Avatar" class="user-avatar">
+                              </td>
+                              <td>Jack Husein</td>
+                              <td>Pickup at Anytown, NY 12345</td>
+                              <td>19:00 PM</td>
+                              <td><span class="status-badge offline">Offline</span></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <img src="assets/images/avatar3.png" alt="User Avatar" class="user-avatar">
+                              </td>
+                              <td>Marie Siray</td>
+                              <td>Delivery to Anytown, NY 12345</td>
+                              <td>16:00 PM</td>
+                              <td><span class="status-badge online">Online</span></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <img src="assets/images/avatar4.png" alt="User Avatar" class="user-avatar">
+                              </td>
+                              <td>Jaka Laguna</td>
+                              <td>Pickup at Anytown, NY 12345</td>
+                              <td>19:00 PM</td>
+                              <td><span class="status-badge offline">Offline</span></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <img src="assets/images/avatar5.png" alt="User Avatar" class="user-avatar">
+                              </td>
+                              <td>Erfisien Nota</td>
+                              <td>Delivery to Anytown, NY 12345</td>
+                              <td>16:00 PM</td>
+                              <td><span class="status-badge online">Online</span></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Alert container for notifications -->
+  <div class="alert-container position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
+
+  <!-- JavaScript Dependencies -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+
+  <!-- Custom JS -->
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Add specific calendar page functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize the calendar days
+      const calendarDays = document.querySelectorAll('.calendar-day');
+      calendarDays.forEach(day => {
+        day.addEventListener('click', function() {
+          // Remove active class from all days
+          calendarDays.forEach(d => d.classList.remove('selected'));
+          // Add active class to clicked day
+          this.classList.add('selected');
+
+          // In a real app, you would load events for the selected date
+          // For now, we'll just update the date display
+          if (!this.classList.contains('other-month')) {
+            const currentMonth = document.querySelector('.month-name.active').textContent;
+            const currentYear = document.querySelector('.year-display').textContent;
+            const selectedDate = this.textContent;
+
+            // Determine the day of week
+            const date = new Date(`${currentMonth} ${selectedDate}, ${currentYear}`);
+            const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
+
+            document.querySelector('h4').textContent = `${dayOfWeek}, ${selectedDate}th ${currentMonth} ${currentYear} | 16:00 PM`;
+          }
+        });
+      });
+
+      // View switcher buttons
+      const cardViewBtn = document.querySelector('.view-button[data-view="card"]');
+      const listViewBtn = document.querySelector('.view-button[data-view="list"]');
+
+      if (cardViewBtn && listViewBtn) {
+        cardViewBtn.addEventListener('click', function() {
+          this.classList.remove('btn-outline-primary');
+          this.classList.add('btn-primary');
+          listViewBtn.classList.remove('btn-primary');
+          listViewBtn.classList.add('btn-outline-primary');
+          document.querySelector('.list-view').classList.add('d-none');
+          document.querySelector('.card-view').classList.remove('d-none');
+
+          // In a real app, you would toggle between card and list view
+        });
+
+        listViewBtn.addEventListener('click', function() {
+          this.classList.remove('btn-outline-primary');
+          this.classList.add('btn-primary');
+          cardViewBtn.classList.remove('btn-primary');
+          cardViewBtn.classList.add('btn-outline-primary');
+          document.querySelector('.card-view').classList.add('d-none');
+          document.querySelector('.list-view').classList.remove('d-none');
+
+          // In a real app, you would toggle between card and list view
+        });
+      }
+    });
+  </script>
+</body>
+</html>

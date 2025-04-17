@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages | Ice Butcher Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar will be loaded here -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <main class="main-content">
+      <!-- Header will be loaded here -->
+      <div id="header-container"></div>
+
+      <div class="row my-4">
+        <div class="col-4">
+          <div class="card chat-container mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">Chat</h5>
+              <button class="btn btn-sm btn-primary rounded-circle">
+                <i class="bi bi-plus"></i>
+              </button>
+            </div>
+            <div class="card-body p-0" style="display: contents;">
+              <ul class="nav nav-pills nav-justified mb-3" id="chat-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="open-tab" data-bs-toggle="tab" data-bs-target="#open-chats" type="button" role="tab" aria-controls="open-chats" aria-selected="true">Open</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="archived-tab" data-bs-toggle="tab" data-bs-target="#archived-chats" type="button" role="tab" aria-controls="archived-chats" aria-selected="false">Archived</button>
+                </li>
+              </ul>
+
+              <div class="tab-content" id="chat-tabsContent">
+                <div class="tab-pane fade show active" id="open-chats" role="tabpanel" aria-labelledby="open-tab">
+                  <ul class="chat-list">
+                    <li class="chat-item">
+                      <div class="chat-avatar">
+                        <img src="assets/images/avatar1.png" alt="User Avatar" class="user-avatar">
+                        <div class="online-indicator"></div>
+                      </div>
+                      <div class="chat-info">
+                        <h6 class="chat-name">Andreana Viola</h6>
+                        <p class="chat-message">Hi, I'd like to track my shipment.</p>
+                      </div>
+                      <div class="chat-meta">
+                        <span class="chat-time">1m ago</span>
+                        <div class="chat-badge">2</div>
+                      </div>
+                    </li>
+                    <li class="chat-item">
+                      <div class="chat-avatar">
+                        <img src="assets/images/avatar2.png" alt="User Avatar" class="user-avatar">
+                        <div class="online-indicator"></div>
+                      </div>
+                      <div class="chat-info">
+                        <h6 class="chat-name">Francesco Long</h6>
+                        <p class="chat-message">Hi, I'd like to track my shipment.</p>
+                      </div>
+                      <div class="chat-meta">
+                        <span class="chat-time">2h ago</span>
+                        <div class="chat-badge">1</div>
+                      </div>
+                    </li>
+                    <li class="chat-item active">
+                      <div class="chat-avatar">
+                        <img src="assets/images/avatar3.png" alt="User Avatar" class="user-avatar">
+                        <div class="online-indicator online"></div>
+                      </div>
+                      <div class="chat-info">
+                        <h6 class="chat-name">Alexandra Michu</h6>
+                        <p class="chat-message">Hi, I'd like to track my shipment.</p>
+                      </div>
+                      <div class="chat-meta">
+                        <span class="chat-time">09:00</span>
+                      </div>
+                    </li>
+                    <li class="chat-item">
+                      <div class="chat-avatar">
+                        <img src="assets/images/avatar4.png" alt="User Avatar" class="user-avatar">
+                        <div class="online-indicator offline"></div>
+                      </div>
+                      <div class="chat-info">
+                        <h6 class="chat-name">Hwang Lee</h6>
+                        <p class="chat-message">Hi, I'd like to track my shipment.</p>
+                      </div>
+                      <div class="chat-meta">
+                        <span class="chat-time">Today</span>
+                      </div>
+                    </li>
+                    <li class="chat-item">
+                      <div class="chat-avatar">
+                        <img src="assets/images/avatar5.png" alt="User Avatar" class="user-avatar">
+                        <div class="online-indicator offline"></div>
+                      </div>
+                      <div class="chat-info">
+                        <h6 class="chat-name">Maximillian</h6>
+                        <p class="chat-message">Hi, I'd like to track my shipment.</p>
+                      </div>
+                      <div class="chat-meta">
+                        <span class="chat-time">23/11</span>
+                        <div class="chat-status">
+                          <i class="bi bi-check-all text-primary"></i>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="chat-item">
+                      <div class="chat-avatar">
+                        <img src="assets/images/avatar1.png" alt="User Avatar" class="user-avatar">
+                        <div class="online-indicator offline"></div>
+                      </div>
+                      <div class="chat-info">
+                        <h6 class="chat-name">Xiao Ming</h6>
+                        <p class="chat-message">Hi, I'd like to track my shipment.</p>
+                      </div>
+                      <div class="chat-meta">
+                        <span class="chat-time">23/11</span>
+                      </div>
+                    </li>
+                    <li class="chat-item">
+                      <div class="chat-avatar">
+                        <img src="assets/images/avatar2.png" alt="User Avatar" class="user-avatar">
+                        <div class="online-indicator offline"></div>
+                      </div>
+                      <div class="chat-info">
+                        <h6 class="chat-name">Xiao Ming</h6>
+                        <p class="chat-message">Hi, I'd like to track my shipment.</p>
+                      </div>
+                      <div class="chat-meta">
+                        <span class="chat-time">23/11</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="archived-chats" role="tabpanel" aria-labelledby="archived-tab">
+                  <ul class="chat-list">
+                    <li class="chat-item">
+                      <div class="chat-avatar">
+                        <img src="assets/images/avatar4.png" alt="User Avatar" class="user-avatar">
+                      </div>
+                      <div class="chat-info">
+                        <h6 class="chat-name">Jane Smith</h6>
+                        <p class="chat-message">Thanks for your help!</p>
+                      </div>
+                      <div class="chat-meta">
+                        <span class="chat-time">15/10</span>
+                      </div>
+                    </li>
+                    <li class="chat-item">
+                      <div class="chat-avatar">
+                        <img src="assets/images/avatar5.png" alt="User Avatar" class="user-avatar">
+                      </div>
+                      <div class="chat-info">
+                        <h6 class="chat-name">David Wilson</h6>
+                        <p class="chat-message">Order received. Thank you!</p>
+                      </div>
+                      <div class="chat-meta">
+                        <span class="chat-time">28/09</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-8">
+          <div class="chat-container">
+            <div class="chat-header">
+              <div class="d-flex align-items-center">
+                <img src="assets/images/avatar3.png" alt="Alexandra Michu" class="user-avatar me-3">
+                <div>
+                  <h6 class="mb-0 chat-header-name">Alexandra Michu</h6>
+                  <p class="text-success small mb-0">Online</p>
+                </div>
+              </div>
+              <div class="chat-actions">
+                <button class="btn btn-sm btn-light rounded-circle me-2" data-bs-toggle="tooltip" title="Call">
+                  <i class="bi bi-telephone"></i>
+                </button>
+                <button class="btn btn-sm btn-light rounded-circle me-2" data-bs-toggle="tooltip" title="Video">
+                  <i class="bi bi-camera-video"></i>
+                </button>
+                <button class="btn btn-sm btn-light rounded-circle" data-bs-toggle="tooltip" title="More">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="chat-body">
+              <div class="chat-date">Today</div>
+
+              <div class="message incoming">
+                <div class="message-avatar">
+                  <img src="assets/images/avatar3.png" alt="User Avatar" class="user-avatar">
+                </div>
+                <div class="message-content">
+                  <p>Hi, I'd like to track my shipment.</p>
+                  <div class="message-time">9:00 AM</div>
+                </div>
+              </div>
+
+              <div class="message outgoing">
+                <div class="message-content">
+                  <p>Sure! Please enter your tracking number.</p>
+                  <div class="message-time">9:10 AM</div>
+                </div>
+              </div>
+
+              <div class="message incoming">
+                <div class="message-avatar">
+                  <img src="assets/images/avatar3.png" alt="User Avatar" class="user-avatar">
+                </div>
+                <div class="message-content">
+                  <p>1234567890</p>
+                  <div class="message-time">9:11 AM</div>
+                </div>
+              </div>
+
+              <div class="message outgoing">
+                <div class="message-content">
+                  <p>Your package is in transit and expected to be delivered by March 22.</p>
+                  <div class="message-time">10:10 AM</div>
+                </div>
+              </div>
+
+              <div class="message incoming">
+                <div class="message-avatar">
+                  <img src="assets/images/avatar3.png" alt="User Avatar" class="user-avatar">
+                </div>
+                <div class="message-content">
+                  <p>• • •</p>
+                  <div class="message-time">10:40 AM</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-footer">
+              <input type="text" class="chat-input" placeholder="Write your message...">
+              <button class="btn btn-light rounded-circle me-2">
+                <i class="bi bi-emoji-smile"></i>
+              </button>
+              <button class="btn btn-light rounded-circle me-2">
+                <i class="bi bi-paperclip"></i>
+              </button>
+              <button class="btn btn-primary rounded-circle send-button">
+                <i class="bi bi-send"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Alert container for notifications -->
+  <div class="alert-container position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
+
+  <!-- JavaScript Dependencies -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+
+  <!-- Custom JS -->
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Initialize chat functionality when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // This function is defined in main.js
+      if (typeof initializeChat === 'function') {
+        initializeChat();
+      }
+    });
+  </script>
+</body>
+</html>
