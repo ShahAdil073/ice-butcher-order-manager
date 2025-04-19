@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board | Ice Butcher Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <div id="sidebar-container"></div>
+    <main class="main-content">
+      <div id="header-container"></div>
+      <!-- Tabs -->
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Overview</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Board</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="calendar.html">Calender</a>
+        </li>
+      </ul>
+      <!-- Dashcards Section - same as Home-1.png, adjust as needed for actual board functionality -->
+      <div class="row mt-4">
+        <div class="col-xl-8 mb-4">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">Total Task</h5>
+              <div class="date-selector">28</div>
+            </div>
+            <div class="card-body">
+              <div class="task-status">
+                <div class="task-column todo">
+                  <div class="task-number">6</div>
+                  <div class="task-label">To do</div>
+                </div>
+                <div class="task-column doing">
+                  <div class="task-number">3</div>
+                  <div class="task-label">Doing</div>
+                </div>
+                <div class="task-column done">
+                  <div class="task-number">20</div>
+                  <div class="task-label">Done</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 mb-4">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">Upcoming Orders</h5>
+              <div class="date-selector">June, Week 1</div>
+            </div>
+            <div class="card-body">
+              <div class="mb-1 d-flex align-items-center">
+                <span style="min-width:40px;">Mon</span>
+                <div class="flex-fill ms-2 bg-primary rounded" style="height:10px; width:80%;"></div>
+                <span class="ms-2">50</span>
+              </div>
+              <div class="mb-1 d-flex align-items-center">
+                <span style="min-width:40px;">Tue</span>
+                <div class="flex-fill ms-2 bg-primary opacity-75 rounded" style="height:10px; width:65%;"></div>
+                <span class="ms-2">40</span>
+              </div>
+              <div class="mb-1 d-flex align-items-center">
+                <span style="min-width:40px;">Wed</span>
+                <div class="flex-fill ms-2 bg-primary opacity-50 rounded" style="height:10px; width:40%;"></div>
+                <span class="ms-2">30</span>
+              </div>
+              <div class="mb-1 d-flex align-items-center">
+                <span style="min-width:40px;">Fri</span>
+                <div class="flex-fill ms-2 bg-primary opacity-25 rounded" style="height:10px; width:20%;"></div>
+                <span class="ms-2">20</span>
+              </div>
+              <div class="mb-1 d-flex align-items-center">
+                <span style="min-width:40px;">Thu</span>
+                <div class="flex-fill ms-2 bg-primary opacity-10 rounded" style="height:10px; width:10%;"></div>
+                <span class="ms-2">10</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Activity Section -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">Activity</h5>
+              <div>
+                <button class="btn btn-outline-primary btn-sm rounded-pill me-1">Day</button>
+                <button class="btn btn-light btn-sm rounded-pill me-1">Week</button>
+                <button class="btn btn-light btn-sm rounded-pill">Month</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="activity-timeline">
+                <!-- The timeline is simplified, can be improved for bars with avatars inline as in Home-1.png -->
+                <div class="d-flex flex-column gap-4">
+                  <div class="d-flex align-items-center" style="position:relative;">
+                    <span class="fw-bold me-3" style="width:170px;">Sacred Spiral Sculpt</span>
+                    <div class="flex-fill position-relative">
+                      <div class="rounded-pill" style="width:60%;background:#3887fe;height:32px;position:relative;display:inline-block;"></div>
+                      <img src="assets/images/avatar1.png" class="user-avatar" style="position:absolute;left:0;top:-18px;width:36px;height:36px;" alt="Sebastian Nelson">
+                      <span class="position-absolute text-white" style="left:55px;top:7px;font-weight:500;">Sebastian Nelson</span>
+                      <span class="position-absolute bg-white text-secondary px-2 rounded-pill" style="right:0;top:6px;font-size:13px;">60%</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center" style="position:relative;">
+                    <span class="fw-bold me-3" style="width:170px;">Life Carving</span>
+                    <div class="flex-fill position-relative">
+                      <div class="rounded-pill" style="width:47%;background:#41dcb5;height:32px;position:relative;display:inline-block;"></div>
+                      <img src="assets/images/avatar2.png" class="user-avatar" style="position:absolute;left:0;top:-18px;width:36px;height:36px;" alt="Ester Ray">
+                      <span class="position-absolute text-white" style="left:55px;top:7px;font-weight:500;">Ester Ray</span>
+                      <span class="position-absolute bg-white text-secondary px-2 rounded-pill" style="right:0;top:6px;font-size:13px;">47%</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center" style="position:relative;">
+                    <span class="fw-bold me-3" style="width:170px;">Geometric Metal</span>
+                    <div class="flex-fill position-relative">
+                      <div class="rounded-pill" style="width:55%;background:#ff3862;height:32px;position:relative;display:inline-block;"></div>
+                      <img src="assets/images/avatar3.png" class="user-avatar" style="position:absolute;left:0;top:-18px;width:36px;height:36px;" alt="Sunny Khan">
+                      <span class="position-absolute text-white" style="left:55px;top:7px;font-weight:500;">Sunny Khan</span>
+                      <span class="position-absolute bg-white text-secondary px-2 rounded-pill" style="right:0;top:6px;font-size:13px;">55%</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center" style="position:relative;">
+                    <span class="fw-bold me-3" style="width:170px;">Human Bust Stone</span>
+                    <div class="flex-fill position-relative">
+                      <div class="rounded-pill" style="width:75%;background:#8057ff;height:32px;position:relative;display:inline-block;"></div>
+                      <img src="assets/images/avatar4.png" class="user-avatar" style="position:absolute;left:0;top:-18px;width:36px;height:36px;" alt="Allison Roy">
+                      <span class="position-absolute text-white" style="left:55px;top:7px;font-weight:500;">Allison Roy</span>
+                      <span class="position-absolute bg-white text-secondary px-2 rounded-pill" style="right:0;top:6px;font-size:13px;">75%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between text-muted mt-3 px-2 small" style="font-weight:500;">
+                  <span>WED 1 FEBRUARY</span>
+                  <span>14:00</span>
+                  <span>15:00</span>
+                  <span>16:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="alert-container position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Load sidebar and header components
+    fetch('components/sidebar.html').then(r => r.text()).then(html => {
+      document.getElementById('sidebar-container').innerHTML = html;
+      // Set active for Board menu manually if needed
+      let allLinks = document.querySelectorAll('.sidebar-menu-item');
+      allLinks.forEach(a => a.classList.remove('active'));
+    });
+    fetch('components/header.html').then(r => r.text()).then(html => {
+      document.getElementById('header-container').innerHTML = html.replace('PAGE_TITLE','Board');
+    });
+  </script>
+</body>
+</html>

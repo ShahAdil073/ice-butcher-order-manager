@@ -99,6 +99,9 @@
                       </div>
                     </div>
                   </div>
+                  <div class="d-flex justify-content-end mt-4">
+                    <button class="btn btn-outline-primary" id="uploadDocBtn">Upload document</button>
+                  </div>
                 </div>
                 <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
                   <div class="comments-container">
@@ -205,6 +208,65 @@
   <!-- Alert container for notifications -->
   <div class="alert-container position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
 
+  <!-- Image Modal & Slider -->
+  <div class="modal fade" id="taskImageModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content rounded-4" style="background: #fff; border: none; max-width: 900px; margin: auto;">
+              <div class="modal-header border-0 pb-0">
+                  <img src="assets/images/logo.png" alt="Logo" style="max-width: 80px; margin-bottom: 10px;">
+                  <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body d-flex align-items-center justify-content-center" style="min-height: 440px;">
+                <div class="row w-100">
+                  <div class="col-md-10 d-flex align-items-center justify-content-center">
+                    <img id="main-modal-img" src="" alt="Preview" style="max-width:100%;max-height:64vh;object-fit:contain;box-shadow:0 4px 20px rgba(0,0,0,0.14);border-radius:14px;">
+                  </div>
+                  <div class="col-md-2">
+                    <div id="modal-slider-thumbs" class="d-flex flex-column gap-3">
+                      <!-- Thumbnails injected here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+ <!-- Upload Modal -->
+  <div class="modal fade" id="uploadModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content rounded-4">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title ps-1">Upload files</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-0 px-4">
+          <div class="text-secondary mb-4 ps-1">Select and upload the files of your choice</div>
+          <hr>
+          <h6 class="fw-semibold mt-3">Upload Renderings</h6>
+          <div class="upload-drag-area my-3 rounded-4 border px-0 py-5 text-center position-relative" style="border:2px dashed #D3D6E3;height:180px;">
+            <div class="upload-icon mb-2"><i class="bi bi-cloud-arrow-up" style="font-size:2.5rem;color:#CDD0E3"></i></div>
+            <div class="fw-semibold" style="font-size:1rem;">Choose a file or drag & drop it here</div>
+            <div style="color:#A6A8B6">JPEG, PNG, PDG, and MP4 formats, up to 50MB</div>
+            <input type="file" accept=".pdf,.jpg,.png,.jpeg,.mp4" multiple style="opacity:0;width:100%;height:100%;position:absolute;top:0;left:0;cursor:pointer;" id="renderUploadInput">
+            <button class="btn btn-light mt-3 px-4 py-2 rounded-5" onclick="document.getElementById('renderUploadInput').click()">Browse File</button>
+          </div>
+          <h6 class="fw-semibold mt-4">Upload CNC Files</h6>
+          <div class="upload-drag-area my-3 rounded-4 border px-0 py-5 text-center position-relative" style="border:2px dashed #D3D6E3;height:180px;">
+            <div class="upload-icon mb-2"><i class="bi bi-cloud-arrow-up" style="font-size:2.5rem;color:#CDD0E3"></i></div>
+            <div class="fw-semibold" style="font-size:1rem;">Choose a file or drag & drop it here</div>
+            <div style="color:#A6A8B6">JPEG, PNG, PDG, and MP4 formats, up to 50MB</div>
+            <input type="file" accept=".pdf,.jpg,.png,.jpeg,.mp4" multiple style="opacity:0;width:100%;height:100%;position:absolute;top:0;left:0;cursor:pointer;" id="cncUploadInput">
+            <button class="btn btn-light mt-3 px-4 py-2 rounded-5" onclick="document.getElementById('cncUploadInput').click()">Browse File</button>
+          </div>
+          <div id="uploadedFilesList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   <!-- JavaScript Dependencies -->
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../node_modules/chart.js/dist/chart.umd.js"></script>
@@ -212,5 +274,128 @@
   <!-- Custom JS -->
   <script src="assets/js/components.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Image Modal/Slider
+    const modal = new bootstrap.Modal(document.getElementById('taskImageModal'));
+    const images = Array.from(document.querySelectorAll('#attachment img'));
+    const mainImg = document.getElementById('main-modal-img');
+    const thumbsBox = document.getElementById('modal-slider-thumbs');
+    images.forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        updateModalImages(img.src);
+        modal.show();
+      });
+    });
+    function updateModalImages(activeSrc) {
+      mainImg.src = activeSrc;
+      thumbsBox.innerHTML = images.map(im => `<img src="${im.src}" class="rounded thumb-img mb-1" style="max-width:100px;max-height:120px;object-fit:contain;border:2px solid ${im.src===activeSrc?'#2196f3':'#ddd'};cursor:pointer;">`).join('');
+      Array.from(thumbsBox.children).forEach((thumb,idx) => {
+        thumb.addEventListener('click', () => {
+          mainImg.src = images[idx].src;
+          updateModalImages(images[idx].src);
+        });
+      });
+    }
+    // Upload Areas Logic
+    function fileUploadHandler(boxId, inputId, listId) {
+      const box = document.getElementById(boxId);
+      const input = document.getElementById(inputId);
+      const list = document.getElementById(listId);
+      box.addEventListener('click',()=>input.click());
+      box.addEventListener('dragover',e=>{e.preventDefault(); box.classList.add('drag');});
+      box.addEventListener('dragleave',()=>box.classList.remove('drag'));
+      box.addEventListener('drop',e=>{
+        e.preventDefault(); box.classList.remove('drag');
+        input.files = e.dataTransfer.files; input.dispatchEvent(new Event('change'));
+      });
+      input.addEventListener('change',()=>{
+        Array.from(input.files).forEach(file=>{
+          const fileId = `${file.name}-${Date.now()}`;
+          const ext = file.name.split('.').pop().toLowerCase();
+          const isPDF = ext==='pdf';
+          const icon = isPDF?'<span class="badge bg-danger me-2">PDF</span>':'<i class="bi bi-file-earmark-image me-2"></i>';
+          const size = Math.round(file.size/1024)+ ' KB';
+          const row = document.createElement('div');
+          row.className = 'file-item mb-2 align-items-center d-flex justify-content-between';
+          row.innerHTML = `
+            <span>${icon}${file.name}</span>
+            <span class="text-muted small">0 KB of ${size} 3 <span class="text-info">Uploading...</span></span>
+            <div class="flex-fill px-3"><div class="progress" style="height:6px"><div class="progress-bar" style="width: 0%"></div></div></div>
+            <button class="btn btn-outline-danger btn-sm"><i class="bi bi-x"></i></button>
+          `;
+          list.appendChild(row);
+          // Fake upload progress
+          let loaded = 0; let interval = setInterval(()=> {
+            loaded+=Math.random()*20+12;
+            let percent = Math.min(100, (loaded*1024/file.size)*100);
+            if(percent>=100){ percent=100; clearInterval(interval);
+              row.querySelector('.progress-bar').style.width = '100%';
+              row.querySelector('span.text-info').textContent='Completed';
+              row.querySelector('span.text-muted').textContent=`${size} Completed`;
+              row.querySelector('.btn-outline-danger').outerHTML='<button class="btn btn-outline-secondary btn-sm"><i class="bi bi-trash"></i></button>';
+            } else {
+              row.querySelector('.progress-bar').style.width= percent+'%';
+              row.querySelector('span.text-muted').innerHTML=`${Math.round((percent/100)*file.size/1024)} KB of ${size} 3 <span class='text-info'>Uploading...</span>`;
+            }
+          }, 180);
+        });
+      });
+    }
+    fileUploadHandler('render-upload-box','render-file-input','render-upload-list');
+    fileUploadHandler('cnc-upload-box','cnc-file-input','cnc-upload-list');
+  });
+
+  
+// Upload Modal Logic
+const uploadDocBtn = document.getElementById('uploadDocBtn');
+const uploadModal = document.getElementById('uploadModal');
+const uploadedFilesList = document.getElementById('uploadedFilesList');
+function handleFilesUpload(input) {
+  [...input.files].forEach(f=>simulateUpload(f));
+}
+function simulateUpload(file) {
+  const id = 'up'+Math.random().toString().slice(2);
+  let typeIcon = /pdf/i.test(file.name)?'<img src="https://same-assets.com/icons/pdf.svg" style="width:32px">':'<i class="bi bi-file-earmark-image" style="font-size:2em;color:#2684FF;"></i>';
+  let el = document.createElement('div');
+  el.className = 'file-upload-bar my-3 py-2 px-3 border rounded d-flex align-items-center';
+  el.id = id;
+  el.innerHTML = `
+    <div class='me-3'>${typeIcon}</div>
+    <div class='flex-grow-1'>
+      <div class='d-flex justify-content-between align-items-center'>
+        <div class='fw-semibold'>${file.name}</div>
+        <small class='text-muted'><span class='file-upload-size'>0 KB of ${Math.ceil(file.size/1024)} KB</span>
+         <span class='file-upload-status text-info ms-2'>Uploading...</span></small>
+      </div>
+      <div class='progress my-2' style='height:7px;'>
+        <div class='progress-bar' style='width:0%'></div>
+      </div>
+    </div>
+    <div class='ms-2'>
+      <button class='btn btn-sm btn-outline-danger' onclick="document.getElementById('${id}').remove()"><i class='bi bi-x'></i></button>
+    </div>
+  `;
+  uploadedFilesList.appendChild(el);
+  let uploaded = 0, total = Math.ceil(file.size/1024), bar = el.querySelector('.progress-bar'), stat = el.querySelector('.file-upload-status'), sizeEl = el.querySelector('.file-upload-size');
+  let interval = setInterval(()=>{
+    uploaded += Math.ceil(total/30);
+    if(uploaded>=total) { uploaded=total; stat.innerHTML='Completed <span style="color:#28b76b">●</span>'; clearInterval(interval); }
+    sizeEl.textContent = `${uploaded} KB of ${total} KB`;
+    bar.style.width = `${Math.round(100*uploaded/total)}%`;
+  },80);
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('renderUploadInput').onchange = function(){handleFilesUpload(this)};
+  document.getElementById('cncUploadInput').onchange = function(){handleFilesUpload(this)};
+});
+if(uploadDocBtn && uploadModal) {
+  uploadDocBtn.onclick = function(){
+    new bootstrap.Modal(uploadModal).show();
+  };
+}
+  </script>
 </body>
 </html>

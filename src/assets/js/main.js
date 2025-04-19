@@ -663,6 +663,8 @@ function initializeChat() {
   const chatContainer = document.querySelector('.chat-container');
   const messageInput = document.querySelector('.chat-input');
   const sendButton = document.querySelector('.send-button');
+  const fileAttachmentButton = document.querySelector('.attachment-button');
+  const fileInput = document.getElementById('chat-file-input');
 
   if (chatList.length && chatContainer && messageInput && sendButton) {
     // Select chat when clicking on a chat item
@@ -686,6 +688,48 @@ function initializeChat() {
       }
     });
 
+    // Handle file attachment
+    if (fileAttachmentButton && fileInput) {
+      fileAttachmentButton.addEventListener('click', function() {
+        fileInput.click();
+      });
+
+      fileInput.addEventListener('change', function() {
+        if (this.files.length > 0) {
+          const file = this.files[0];
+          // Create a message with the file attachment
+          const chatBody = document.querySelector('.chat-body');
+          const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+          const fileIcon = getFileIcon(file.type);
+          const fileSize = formatFileSize(file.size);
+
+          const messageElement = document.createElement('div');
+          messageElement.className = 'message outgoing';
+          messageElement.innerHTML = `
+            <div class="message-content">
+              <div class="file-attachment">
+                <i class="${fileIcon}"></i>
+                <div class="file-info">
+                  <div class="file-name">${file.name}</div>
+                  <div class="file-size">${fileSize}</div>
+                </div>
+              </div>
+              <div class="message-time">${timestamp}</div>
+            </div>
+          `;
+
+          chatBody.appendChild(messageElement);
+
+          // Reset file input
+          this.value = '';
+
+          // Scroll to bottom of chat
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+      });
+    }
+
     function sendMessage() {
       const message = messageInput.value.trim();
       if (message) {
@@ -708,5 +752,38 @@ function initializeChat() {
         chatBody.scrollTop = chatBody.scrollHeight;
       }
     }
+
+    // Helper function to get file icon based on file type
+    function getFileIcon(fileType) {
+      if (fileType.includes('image')) {
+        return 'bi bi-image';
+      } else if (fileType.includes('pdf')) {
+        return 'bi bi-file-pdf';
+      } else if (fileType.includes('word') || fileType.includes('document')) {
+        return 'bi bi-file-word';
+      } else if (fileType.includes('excel') || fileType.includes('spreadsheet')) {
+        return 'bi bi-file-excel';
+      } else if (fileType.includes('zip') || fileType.includes('compressed')) {
+        return 'bi bi-file-zip';
+      } else {
+        return 'bi bi-file-earmark';
+      }
+    }
+
+    // Helper function to format file size
+    function formatFileSize(bytes) {
+      if (bytes < 1024) {
+        return bytes + ' bytes';
+      } else if (bytes < 1024 * 1024) {
+        return (bytes / 1024).toFixed(1) + ' KB';
+      } else {
+        return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+      }
+    }
+
+    const emojiButton = document.querySelector('.emoji-button');
+    emojiButton.addEventListener('click', function() {
+      showAlert('Tip: Press ⊞ Win + . (or Cmd + Ctrl + Space on Mac) to open emoji picker.', 'info');
+    });
   }
 }
