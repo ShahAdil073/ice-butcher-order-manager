@@ -4,35 +4,38 @@
     <a href="index.html">
       <img src="assets/images/logo.png" alt="Ice Butcher Logo">
     </a>
+    <button class="toggle-btn" onclick="sidebarCollapse()">
+        <i class="bi bi-chevron-left"></i>
+    </button>
   </div>
   <nav class="sidebar-menu">
     <a href="index.html" class="sidebar-menu-item">
       <i class="bi bi-house-door"></i>
-      Home
+      <span class="hide-on-collapse">Home</span>
     </a>
     <a href="tasks.html" class="sidebar-menu-item">
       <i class="bi bi-list-check"></i>
-      Tasks
+      <span class="hide-on-collapse">Tasks</span>
     </a>
     <a href="messages.html" class="sidebar-menu-item">
       <i class="bi bi-chat-dots"></i>
-      Message
-      <span class="badge bg-danger rounded-pill">2</span>
+      <span class="hide-on-collapse">Messages</span>
+      <span class="badge bg-danger rounded-pill hide-on-collapse">2</span>
     </a>
     <a href="notifications.html" class="sidebar-menu-item">
       <i class="bi bi-bell"></i>
-      Notifications
+      <span class="hide-on-collapse">Notifications</span>
     </a>
   </nav>
 
   <a href="settings.html" class="sidebar-menu-item mt-auto">
     <i class="bi bi-gear"></i>
-    Settings
+    <span class="hide-on-collapse">Settings</span>
   </a>
 
   <div class="user-profile dropdown">
     <img src="assets/images/user.jpg" alt="User Avatar">
-    <div class="user-info">
+    <div class="user-info hide-on-collapse">
       <h6 class="user-name">Sebastian Nelson</h6>
       <p class="user-email">sebastiannelson@gmail.com</p>
     </div>

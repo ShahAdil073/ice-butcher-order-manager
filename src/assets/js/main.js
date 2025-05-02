@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize charts if they exist on the page
   initializeCharts();
 
-  // Handle sidebar toggle for mobile
-  initializeSidebar();
-
   // Initialize dropdown functionality
   initializeDropdowns();
 
@@ -41,48 +38,16 @@ function initializeBootstrapComponents() {
 /**
  * Initialize sidebar toggle functionality
  */
-function initializeSidebar() {
-  const toggleSidebar = document.querySelector('.toggle-sidebar');
-  const sidebar = document.querySelector('.sidebar');
-  const mainContent = document.querySelector('.main-content');
-
-  if (toggleSidebar && sidebar && mainContent) {
-    toggleSidebar.addEventListener('click', function() {
-      sidebar.classList.toggle('show');
-      mainContent.classList.toggle('sidebar-open');
-    });
-
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(event) {
-      const isClickInsideSidebar = sidebar.contains(event.target);
-      const isClickOnToggle = toggleSidebar.contains(event.target);
-
-      if (!isClickInsideSidebar && !isClickOnToggle && window.innerWidth < 992 && sidebar.classList.contains('show')) {
-        sidebar.classList.remove('show');
-        mainContent.classList.remove('sidebar-open');
-      }
-    });
-  }
-
-  // User profile dropdown in sidebar
-  const userProfile = document.querySelector('.user-profile');
-  if (userProfile) {
-    userProfile.addEventListener('click', function(event) {
-      const dropdown = document.querySelector('.user-dropdown');
-      if (dropdown) {
-        dropdown.classList.toggle('show');
-        event.stopPropagation();
-      }
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function() {
-      const dropdown = document.querySelector('.user-dropdown.show');
-      if (dropdown) {
-        dropdown.classList.remove('show');
-      }
-    });
-  }
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('show');
+    document.body.classList.toggle('collapsed');
+    sidebar.classList.toggle('collapsed');
+}
+function sidebarCollapse() {
+    const sidebar = document.querySelector('.sidebar');
+    document.body.classList.toggle('collapsed');
+    sidebar.classList.toggle('collapsed');
 }
 
 /**
