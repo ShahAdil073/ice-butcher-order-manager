@@ -734,163 +734,276 @@ body {
   }
 }
 
-  /* File attachment in messages */
-  .file-attachment {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+/* File attachment in messages */
+.file-attachment {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.file-attachment i {
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+.message .file-attachment {
+  margin-bottom: 5px;
+}
+
+/* Additional styles specific to the calendar page */
+.calendar-header {
+  display: grid!important;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 500;
+}
+
+.calendar-day-header {
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.calendar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.calendar-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #e9ecef;
+}
+
+.calendar-day:hover {
+  background-color: #f8f9fa;
+}
+
+.calendar-day.current {
+  background-color: #0f2d50;
+  color: white;
+  font-weight: 600;
+}
+
+.calendar-day.selected {
+  background-color: #7eb6dd;
+  color: white;
+}
+
+.calendar-day.other-month {
+  color: #adb5bd;
+  background-color: #f8f9fa;
+}
+
+.month-name.active {
+  background-color: #0f2d50;
+  color: white;
+  border-color: #0f2d50;
+}
+
+/* Timeline styles */
+.calendar-timeline {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-weight: 500;
+  color: #6c757d;
+}
+
+.timeline-slot {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.timeline-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.timeline-task {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-task.delivery {
+  border-top: 4px solid #ff7a59;
+}
+
+.timeline-task.pickup {
+  border-top: 4px solid #17a2b8;
+}
+
+.task-title {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0.25rem;
+}
+
+.task-name {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.task-image-container {
+  height: 150px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.task-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-dropdown {
+  position: absolute;
+  bottom: 100%;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 4px;
+  display: none;
+}
+
+.user-profile:hover .user-dropdown {
+  display: block;
+}
+
+/* ========================= CALENDAR PAGE RESPONSIVENESS ========================= */
+@media (max-width: 991.98px) {
+  /* Adjust month switcher, navigation, and view switcher to stack vertically and reduce paddings */
+  .calendar-navigation,
+  .month-switcher,
+  .view-switcher {
+    flex-basis: 100%;
+    width: 100%;
+    justify-content: center !important;
+    margin-bottom: 0.75rem;
   }
-
-  .file-attachment i {
-    font-size: 1.5rem;
-    margin-right: 10px;
+  .card-body > .d-flex.justify-content-between {
+    flex-direction: column !important;
   }
-
-  .message .file-attachment {
-    margin-bottom: 5px;
+  .calendar-header,
+  .calendar-week {
+    font-size: 0.85rem;
   }
-
-    /* Additional styles specific to the calendar page */
-    .calendar-header {
-      display: grid!important;
-      grid-template-columns: repeat(7, 1fr);
-      text-align: center;
-      font-weight: 500;
-    }
-
-    .calendar-day-header {
-      padding: 0.5rem;
-      background-color: #f8f9fa;
-      border-radius: 4px;
-    }
-
-    .calendar-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .calendar-week {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 0.5rem;
-    }
-
-    .calendar-day {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 40px;
-      border-radius: 4px;
-      cursor: pointer;
-      background-color: #fff;
-      border: 1px solid #e9ecef;
-    }
-
-    .calendar-day:hover {
-      background-color: #f8f9fa;
-    }
-
-    .calendar-day.current {
-      background-color: #0f2d50;
-      color: white;
-      font-weight: 600;
-    }
-
-    .calendar-day.selected {
-      background-color: #7eb6dd;
-      color: white;
-    }
-
-    .calendar-day.other-month {
-      color: #adb5bd;
-      background-color: #f8f9fa;
-    }
-
-    .month-name.active {
-      background-color: #0f2d50;
-      color: white;
-      border-color: #0f2d50;
-    }
-
-    /* Timeline styles */
-    .calendar-timeline {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .timeline-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      font-weight: 500;
-      color: #6c757d;
-    }
-
-    .timeline-slot {
-      padding: 0.5rem;
-      text-align: center;
-    }
-
-    .timeline-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .timeline-task {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .timeline-task.delivery {
-      border-top: 4px solid #ff7a59;
-    }
-
-    .timeline-task.pickup {
-      border-top: 4px solid #17a2b8;
-    }
-
-    .task-title {
-      font-size: 0.875rem;
-      color: #6c757d;
-      margin-bottom: 0.25rem;
-    }
-
-    .task-name {
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .task-image-container {
-      height: 150px;
-      overflow: hidden;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-    }
-
-    .task-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-   .user-dropdown {
-      position: absolute;
-      bottom: 100%;
-      background-color: white;
-      min-width: 200px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      border-radius: 4px;
-      display: none;
-    }
-
-    .user-profile:hover .user-dropdown {
-      display: block;
-    }
+  .month-switcher .btn-group {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .month-switcher .month-name {
+    flex: 1 0 23%;
+    min-width: 70px;
+    margin-bottom: 2px;
+  }
+}
+@media (max-width: 768px) {
+  /* Calendar header (days) and weeks: smaller font, less padding */
+  .calendar-header {
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 0.8rem;
+  }
+  .calendar-day-header {
+    padding: 0.25rem;
+    font-size: 0.8rem;
+  }
+  .calendar-grid {
+    gap: 2px;
+  }
+  .calendar-week {
+    gap: 2px;
+  }
+  .calendar-day {
+    min-width: 30px;
+    font-size: 0.88rem;
+    height: 34px;
+    padding: 0 !important;
+  }
+  .timeline-header,
+  .timeline-content {
+    grid-template-columns: 1fr !important;
+    font-size: 0.90rem;
+  }
+  .calendar-timeline {
+    margin-top: 1.2rem;
+  }
+}
+@media (max-width: 560px) {
+  /* Reduce all paddings and fonts for very small screens */
+  .main-content {
+    padding: 0.5rem !important;
+  }
+  .card {
+    margin-bottom: 1rem;
+    border-radius: 4px;
+  }
+  .card-body {
+    padding: 1rem;
+  }
+  .calendar-header,
+  .calendar-week {
+    font-size: 0.76rem;
+  }
+  .calendar-day {
+    min-width: 20px;
+    font-size: 0.67rem;
+    height: 22px;
+  }
+  .timeline-header,
+  .timeline-content {
+    grid-template-columns: 1fr !important;
+    font-size: 0.77rem;
+  }
+  .month-switcher .btn-group {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  .month-switcher .month-name {
+    min-width: 46px;
+    padding: 1px 3px 1px 3px;
+    font-size: 0.74rem;
+  }
+  .calendar-timeline .timeline-task {
+    padding: 0.7rem;
+  }
+  .calendar-timeline {
+    margin-top: 0.7rem;
+  }
+  .calendar-navigation .btn,
+  .view-switcher .btn,
+  .month-switcher .btn {
+    font-size: 0.82rem;
+    padding: 0.21rem 0.5rem;
+  }
+  .timeline-task {
+    margin-bottom: 0.7rem;
+  }
+}
+/* ========================= END OF CALENDAR PAGE RESPONSIVENESS ========================= */

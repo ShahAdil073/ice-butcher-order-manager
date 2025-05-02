@@ -284,91 +284,125 @@ function initializeCharts() {
  * Initialize calendar functionality
  */
 function initializeCalendar() {
-  const calendarDays = document.querySelectorAll('.calendar-day');
-  const monthNames = document.querySelectorAll('.month-name');
+  // Only run on calendar.html
+  if (!document.getElementById('calendar-grid')) return;
+  const calendarGrid = document.getElementById('calendar-grid');
+  const monthNames = Array.from(document.querySelectorAll('.month-name'));
   const yearDisplay = document.querySelector('.year-display');
   const prevMonthBtn = document.querySelector('.prev-month');
   const nextMonthBtn = document.querySelector('.next-month');
+  const todayBtn = document.getElementById('today-btn');
+  const dateDisplay = document.getElementById('calendar-date-display');
 
-  if (calendarDays.length && prevMonthBtn && nextMonthBtn) {
-    const currentDate = new Date();
-    let currentMonth = currentDate.getMonth();
-    let currentYear = currentDate.getFullYear();
+  let today = new Date();
+  let selected = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  let viewYear = today.getFullYear();
+  let viewMonth = today.getMonth();
 
-    // Function to update calendar
-    const updateCalendar = () => {
-      // Update month and year displays
-      if (monthNames.length) {
-        monthNames.forEach(monthName => {
-          monthName.classList.remove('active');
-        });
-        monthNames[currentMonth].classList.add('active');
+  function renderCalendar(year, month, selectedDate) {
+    // Clean grid
+    calendarGrid.innerHTML = '';
+    // Find first day of week
+    const firstDow = new Date(year, month, 1).getDay();
+    const numDays = new Date(year, month + 1, 0).getDate();
+    const prevMonthDays = new Date(year, month, 0).getDate();
+    let row = document.createElement('div');
+    row.className = 'calendar-week';
+    // Days from previous month
+    for (let i = 0; i < firstDow; i++) {
+      const d = document.createElement('div');
+      d.className = 'calendar-day other-month';
+      d.textContent = prevMonthDays - firstDow + i + 1;
+      row.appendChild(d);
+    }
+    // Days of current month
+    for (let day = 1; day <= numDays; day++) {
+      if ((firstDow + day - 1) % 7 === 0 && row.children.length) {
+        calendarGrid.appendChild(row);
+        row = document.createElement('div');
+        row.className = 'calendar-week';
       }
-
-      if (yearDisplay) {
-        yearDisplay.textContent = currentYear;
+      const d = document.createElement('div');
+      d.className = 'calendar-day';
+      d.textContent = day;
+      const isToday = (year === today.getFullYear() && month === today.getMonth() && day === today.getDate());
+      if (isToday) d.classList.add('current');
+      if (selectedDate && day === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) {
+        d.classList.add('selected');
       }
-
-      // Get first day of month and number of days
-      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-      // Update calendar days
-      calendarDays.forEach((day, index) => {
-        day.textContent = '';
-        day.classList.remove('current-month', 'other-month', 'current-day', 'has-event');
-
-        const dayNumber = index - firstDay + 1;
-
-        if (dayNumber > 0 && dayNumber <= daysInMonth) {
-          day.textContent = dayNumber;
-          day.classList.add('current-month');
-
-          // Mark current day
-          if (currentMonth === currentDate.getMonth() &&
-              currentYear === currentDate.getFullYear() &&
-              dayNumber === currentDate.getDate()) {
-            day.classList.add('current-day');
-          }
-
-          // Add click event to days
-          day.addEventListener('click', function() {
-            calendarDays.forEach(d => d.classList.remove('selected'));
-            this.classList.add('selected');
-
-            // Here you would show events for the selected day
-            const selectedDate = new Date(currentYear, currentMonth, parseInt(this.textContent));
-            showEventsForDate(selectedDate);
-          });
-        } else {
-          day.classList.add('other-month');
-        }
+      d.addEventListener('click', function() {
+        selected = new Date(year, month, day);
+        renderCalendar(year, month, selected);
+        updateDateDisplay(selected);
       });
-    };
-
-    // Initialize calendar
-    updateCalendar();
-
-    // Previous month button
-    prevMonthBtn.addEventListener('click', function() {
-      currentMonth--;
-      if (currentMonth < 0) {
-        currentMonth = 11;
-        currentYear--;
+      row.appendChild(d);
+    }
+    // Days from next month (to fill grid)
+    let left = 7 - row.children.length;
+    if (left < 7 && left > 0) {
+      for (let i = 1; i <= left; i++) {
+        const d = document.createElement('div');
+        d.className = 'calendar-day other-month';
+        d.textContent = i;
+        row.appendChild(d);
       }
-      updateCalendar();
-    });
-
-    // Next month button
-    nextMonthBtn.addEventListener('click', function() {
-      currentMonth++;
-      if (currentMonth > 11) {
-        currentMonth = 0;
-        currentYear++;
-      }
-      updateCalendar();
-    });
+    }
+    calendarGrid.appendChild(row);
+    // Update month buttons
+    if (monthNames.length) {
+      monthNames.forEach((btn, idx) => btn.classList.toggle('active', idx === month));
+    }
+    if (yearDisplay) yearDisplay.textContent = year;
   }
+
+  function updateDateDisplay(date) {
+    if (!dateDisplay) return;
+    const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    dateDisplay.textContent = date.toLocaleDateString('en-US', opts) + ' | 16:00 PM';
+  }
+
+  // Month switch
+  monthNames.forEach((btn, idx) => {
+    btn.addEventListener('click', function() {
+      viewMonth = idx;
+      selected = new Date(viewYear, viewMonth, 1);
+      renderCalendar(viewYear, viewMonth, selected);
+      updateDateDisplay(selected);
+    });
+  });
+  // Prev/next month
+  if (prevMonthBtn) prevMonthBtn.addEventListener('click', function() {
+    viewMonth--;
+    if (viewMonth < 0) {
+      viewMonth = 11;
+      viewYear--;
+    }
+    selected = new Date(viewYear, viewMonth, 1);
+    renderCalendar(viewYear, viewMonth, selected);
+    updateDateDisplay(selected);
+  });
+  if (nextMonthBtn) nextMonthBtn.addEventListener('click', function() {
+    viewMonth++;
+    if (viewMonth > 11) {
+      viewMonth = 0;
+      viewYear++;
+    }
+    selected = new Date(viewYear, viewMonth, 1);
+    renderCalendar(viewYear, viewMonth, selected);
+    updateDateDisplay(selected);
+  });
+  // Today button
+  if (todayBtn) todayBtn.addEventListener('click', function() {
+    viewYear = today.getFullYear();
+    viewMonth = today.getMonth();
+    selected = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    renderCalendar(viewYear, viewMonth, selected);
+    updateDateDisplay(selected);
+  });
+
+  // INIT: render this month and highlight today
+  renderCalendar(viewYear, viewMonth, selected);
+  updateDateDisplay(selected);
 
   // Handle day/week/month view toggling
   const viewButtons = document.querySelectorAll('.view-button');
