@@ -302,26 +302,11 @@ function initializeCalendar() {
   function renderCalendar(year, month, selectedDate) {
     // Clean grid
     calendarGrid.innerHTML = '';
-    // Find first day of week
-    const firstDow = new Date(year, month, 1).getDay();
+    // Get number of days in the month
     const numDays = new Date(year, month + 1, 0).getDate();
-    const prevMonthDays = new Date(year, month, 0).getDate();
-    let row = document.createElement('div');
-    row.className = 'calendar-week';
-    // Days from previous month
-    for (let i = 0; i < firstDow; i++) {
-      const d = document.createElement('div');
-      d.className = 'calendar-day other-month';
-      d.textContent = prevMonthDays - firstDow + i + 1;
-      row.appendChild(d);
-    }
-    // Days of current month
+
+    // Days of current month - all in a single line
     for (let day = 1; day <= numDays; day++) {
-      if ((firstDow + day - 1) % 7 === 0 && row.children.length) {
-        calendarGrid.appendChild(row);
-        row = document.createElement('div');
-        row.className = 'calendar-week';
-      }
       const d = document.createElement('div');
       d.className = 'calendar-day';
       d.textContent = day;
@@ -335,19 +320,8 @@ function initializeCalendar() {
         renderCalendar(year, month, selected);
         updateDateDisplay(selected);
       });
-      row.appendChild(d);
+      calendarGrid.appendChild(d);
     }
-    // Days from next month (to fill grid)
-    let left = 7 - row.children.length;
-    if (left < 7 && left > 0) {
-      for (let i = 1; i <= left; i++) {
-        const d = document.createElement('div');
-        d.className = 'calendar-day other-month';
-        d.textContent = i;
-        row.appendChild(d);
-      }
-    }
-    calendarGrid.appendChild(row);
     // Update month buttons
     if (monthNames.length) {
       monthNames.forEach((btn, idx) => btn.classList.toggle('active', idx === month));
